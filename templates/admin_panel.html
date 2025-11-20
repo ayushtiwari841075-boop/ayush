@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ayush</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="dashboard-container">
+
+    <div class="brand">AYUSH PANDIT</div>
+
+    <h2>Admin Panel</h2>
+
+    <h3 style="color:#00eaff;">Pending Keys</h3>
+    <ul>
+        {% for key, data in pending.items() %}
+        <li style="margin:10px 0;">
+            <b style="color:#00eaff;">{{ key }}</b> — {{ data.name }}
+            <a href="/admin/approve/{{ key }}" style="margin-left:10px; color:yellow;">[Approve]</a>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <br><br>
+
+    <h3 style="color:#00eaff;">Approved Keys</h3>
+    <ul>
+        {% for key, data in approved_keys.items() %}
+        <li style="margin:10px 0;">
+            <b style="color:#00eaff;">{{ key }}</b> — {{ data.name }}
+        </li>
+        {% endfor %}
+    </ul>
+
+    <div class="footer">© Ayush Pandit</div>
+
+</div>
+
+</body>
+</html>
