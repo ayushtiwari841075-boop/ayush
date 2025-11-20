@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ayush</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+*{
+    padding:0;
+    margin:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background: radial-gradient(circle at top, #0a0f1a, #02050a);
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.card{
+    width:90%;
+    max-width:380px;
+    background: rgba(255,255,255,0.06);
+    padding:35px;
+    border-radius:20px;
+    box-shadow:0 0 35px rgba(0,255,255,0.25);
+    backdrop-filter: blur(12px);
+    animation: fade 0.9s ease;
+}
+
+.brand{
+    text-align:center;
+    font-size:28px;
+    font-weight:600;
+    color:#00eaff;
+    margin-bottom:20px;
+    text-shadow:0 0 12px #00eaff;
+    letter-spacing:1px;
+}
+
+h2,h3{
+    text-align:center;
+    margin-bottom:15px;
+    color:#fff;
+}
+
+input{
+    width:100%;
+    padding:14px;
+    background: rgba(255,255,255,0.08);
+    border:1px solid rgba(0,255,255,0.3);
+    border-radius:10px;
+    margin-bottom:15px;
+    color:white;
+}
+
+input::placeholder{
+    color:#ccc;
+}
+
+button{
+    width:100%;
+    padding:14px;
+    background: linear-gradient(90deg,#00eaff,#0077ff);
+    border:none;
+    border-radius:12px;
+    font-weight:600;
+    color:#000;
+    font-size:15px;
+    box-shadow: 0 0 15px #00eaff;
+    cursor:pointer;
+    margin-top:5px;
+    transition:0.3s;
+}
+
+button:hover{
+    transform: scale(1.03);
+    box-shadow: 0 0 25px #00eaff;
+}
+
+.footer{
+    margin-top:20px;
+    text-align:center;
+    color:#aaa;
+    font-size:12px;
+}
+
+@keyframes fade{
+    from{opacity:0;transform:translateY(25px);}
+    to{opacity:1;transform:translateY(0);}
+}
+</style>
+
+</head>
+<body>
+
+<div class="card">
+
+    <div class="brand">AYUSH PANDIT</div>
+
+    <h2>Welcome Back</h2>
+
+    <form method="POST" action="/login">
+        <input type="text" name="username" placeholder="Username" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <button type="submit">Login</button>
+    </form>
+
+    <br><h3>Create Account</h3>
+
+    <form method="POST" action="/signup">
+        <input type="text" name="username" placeholder="New Username" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <input type="password" name="confirm_password" placeholder="Confirm Password" required>
+        <button type="submit">Signup</button>
+    </form>
+
+    <div class="footer">© Ayush Pandit</div>
+
+</div>
+
+</body>
+  </html>
