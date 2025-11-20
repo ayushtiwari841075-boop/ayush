@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ayush</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="card">
+
+    <div class="brand">AYUSH PANDIT</div>
+
+    <h2>Approval Required</h2>
+
+    <p style="text-align:center; color:#00eaff;">Your Key:</p>
+    <h3 style="text-align:center; color:#00eaff;">{{ user_key }}</h3>
+
+    <p style="text-align:center; color:#ccc;">Your key is not approved yet.</p>
+
+    <form action="/request_approval" method="POST">
+        <button type="submit">Request Approval</button>
+    </form>
+
+    <br>
+    <button onclick="checkStatus()">Check Status</button>
+
+    <script>
+    function checkStatus(){
+        fetch('/check_approval')
+        .then(r=>r.json())
+        .then(d=>{
+            if (d.approved){
+                alert("Key Approved!");
+                window.location="/dashboard";
+            } else {
+                alert("Still Pending…");
+            }
+        });
+    }
+    </script>
+
+    <div class="footer">© Ayush Pandit</div>
+
+</div>
+
+</body>
+</html>
