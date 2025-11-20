@@ -2,7 +2,6 @@ services:
   - type: web
     name: ayush-pandit-panel
     env: python
-    buildCommand: "pip install --upgrade pip && pip install -r requirements.txt"
-    startCommand: "gunicorn main:app"
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn app:app"
     plan: free
-    autoDeploy: true
