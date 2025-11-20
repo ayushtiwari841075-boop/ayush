@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ayush</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="dashboard-container">
+
+    <div class="brand">AYUSH PANDIT</div>
+
+    <div class="navbar">
+        <h3 style="color:#00eaff;">Dashboard</h3>
+        <a href="/logout">Logout</a>
+    </div>
+
+    <h3>Your Key: <span style="color:#00eaff;">{{ user_key }}</span></h3>
+
+    <form action="/save_config" method="POST">
+
+        <input type="text" name="chat_id" placeholder="Chat ID" value="{{ user_config.chat_id }}">
+
+        <input type="text" name="name_prefix" placeholder="Name Prefix" value="{{ user_config.name_prefix }}">
+
+        <input type="number" name="delay" placeholder="Delay (Seconds)" value="{{ user_config.delay }}">
+
+        <textarea name="cookies" placeholder="Cookies" rows="3">{{ user_config.cookies }}</textarea>
+
+        <textarea name="messages" placeholder="Messages (one per line)" rows="5">{{ user_config.messages }}</textarea>
+
+        <button type="submit">Save Settings</button>
+    </form>
+
+    <br>
+    <button onclick="startAuto()">START Automation</button>
+    <button onclick="stopAuto()">STOP Automation</button>
+
+    <br><br>
+    <h3>Logs</h3>
+    <pre id="logs">Loading...</pre>
+
+    <div class="footer">© Ayush Pandit</div>
+
+</div>
+
+<script>
+function reloadLogs(){
+    fetch('/get_logs')
+    .then(r=>r.json())
+    .then(d=>{
+        document.getElementById("logs").innerText = d.logs.join("\n");
+    });
+}
+setInterval(reloadLogs, 1500);
+reloadLogs();
+
+function startAuto(){
+    fetch('/start_automation',{method:"POST"})
+    .then(r=>r.json())
+    .then(d=>alert(d.message));
+}
+
+function stopAuto(){
+    fetch('/stop_automation',{method:"POST"})
+    .then(r=>r.json())
+    .then(d=>alert(d.message));
+}
+</script>
+
+</body>
+</html>
