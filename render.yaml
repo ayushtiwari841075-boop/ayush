@@ -1,7 +1,6 @@
 services:
   - type: web
-    name: ayush-pandit-panel
+    name: Ayush
     env: python
-    buildCommand: "pip install -r requirements.txt"
-    startCommand: "gunicorn app:app"
-    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn main:app
