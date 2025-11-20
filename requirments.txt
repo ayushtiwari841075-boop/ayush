@@ -1,0 +1,6 @@
+flask
+selenium
+requests
+cryptography
+gunicorn
+urllib3
