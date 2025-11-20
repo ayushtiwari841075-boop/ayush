@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*{
+    padding:0;
+    margin:0;
+    box-sizing:border-box;
+    font-family:'Poppins', sans-serif;
+}
+
+body{
+    background: linear-gradient(135deg, #0d0d0d, #111, #0a0f1a);
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:40px 0;
+    color:#fff;
+}
+
+.glow-card{
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding:35px;
+    width:390px;
+    border-radius:22px;
+    backdrop-filter: blur(15px);
+    box-shadow:
+        0 0 20px rgba(0,255,255,0.15),
+        0 0 40px rgba(0,255,255,0.10);
+    animation: fadeUp .7s ease;
+}
+
+h2,h3{
+    text-align:center;
+    margin-bottom:20px;
+    font-weight:600;
+    letter-spacing:1px;
+}
+
+input, textarea{
+    width:100%;
+    padding:14px;
+    background: rgba(255,255,255,0.07);
+    border:1px solid rgba(255,255,255,0.2);
+    border-radius:12px;
+    margin:8px 0 18px 0;
+    color:#fff;
+    transition:0.3s;
+}
+
+input:focus, textarea:focus{
+    box-shadow: 0 0 12px cyan;
+    border-color: cyan;
+}
+
+button{
+    width:100%;
+    padding:14px;
+    border-radius:12px;
+    border:none;
+    font-size:16px;
+    background: linear-gradient(90deg, #00eaff, #0077ff);
+    box-shadow:0 0 15px #0077ff;
+    cursor:pointer;
+    color:#000;
+    font-weight:600;
+    transition:0.3s;
+}
+
+button:hover{
+    transform: translateY(-3px);
+    box-shadow:0 0 25px #00eaff;
+}
+
+a{
+    color:#00eaff;
+    text-decoration:none;
+}
+
+.dashboard-container{
+    width:92%;
+    max-width:950px;
+    background: rgba(255,255,255,0.06);
+    border-radius:25px;
+    padding:35px;
+    backdrop-filter: blur(15px);
+    box-shadow:
+        0 0 25px rgba(0,255,255,0.15),
+        0 0 40px rgba(0,255,255,0.10);
+    animation: fadeUp .9s ease;
+}
+
+.navbar{
+    width:100%;
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:25px;
+}
+
+.navbar h2{
+    margin:0;
+}
+
+.navbar a{
+    font-size:14px;
+    background: rgba(255,255,255,0.2);
+    padding:8px 14px;
+    border-radius:10px;
+}
+
+pre{
+    background: rgba(0,0,0,0.4);
+    border:1px solid rgba(255,255,255,0.15);
+    padding:14px;
+    border-radius:12px;
+    max-height:300px;
+    overflow-y:auto;
+    color:#0ff;
+}
+
+ul li{
+    margin-bottom:10px;
+}
+
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
