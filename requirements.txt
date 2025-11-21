@@ -1,6 +1,4 @@
-flask
+Flask
 selenium
-requests
-cryptography
 gunicorn
-urllib3
+requests
