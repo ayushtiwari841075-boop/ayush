@@ -5,12 +5,9 @@ import time
 import os
 
 app = Flask(__name__)
-
-# ------------------ PREMIUM HTML TEMPLATE ------------------
-
 premium_html = """
-<!DOCTYPE html>
-<html>
+
+<!DOCTYPE html><html>
 <head>
     <title>AYUSH OSINT - Premium Phone Lookup</title>
     <style>
@@ -73,70 +70,70 @@ premium_html = """
 <body>
 <div class="header">AYUSH PREMIUM OSINT - PHONE LOOKUP</div>
 <p>Developer: <b>@ayush_jibot</b></p>
-
 <div class="box">
     <form method="POST">
         <input type="text" name="number" placeholder="Enter Phone Number" required>
         <br>
         <button type="submit">SEARCH</button>
     </form>
-</div>
+</div>{% if records %}
 
-{% if records %}
 <h2>🔍 Lookup Result</h2>
 {% for r in records %}
 <div class="record">
     <p><b>👤 Name:</b> {{ r.get('name','N/A') }}</p>
-    <p><b>📱 Mobile:</b> {{ r.get('mobile','N/A') }}</p>
-    <p><b>👨 Father:</b> {{ r.get('fname','N/A') }}</p>
-    <p><b>📞 Alt Number:</b> {{ r.get('alt','N/A') }}</p>
+    <p><b>📱 Mobile:</b> {{ r.get('number','N/A') }}</p>
+    <p><b>👨 Father:</b> {{ r.get('father_name','N/A') }}</p>
+    <p><b>📞 Alt Number:</b> {{ r.get('alternate_number','N/A') }}</p>
     <p><b>🏠 Address:</b> {{ r.get('address','N/A') }}</p>
-    <p><b>🆔 Aadhaar:</b> {{ r.get('id','N/A') }}</p>
+    <p><b>🆔 Aadhaar:</b> {{ r.get('aadhaar','N/A') }}</p>
     <p><b>🌐 Circle:</b> {{ r.get('circle','N/A') }}</p>
 </div>
 {% endfor %}
-{% endif %}
+{% endif %}{% if error %}
 
-{% if error %}
 <p class="error">{{ error }}</p>
-{% endif %}
-
-</body>
+{% endif %}</body>
 </html>
 """
-
-# ------------------ DATA FETCH FUNCTION ------------------
-
 def fetch_number_info(number):
+    url = f"https://vippanels.x10.mx/numapi.php?action=api&key=month&term={number}"
     try:
-        url = f"https://vippanels.x10.mx/numapi.php?action=api&key=month&term={number}"
         response = requests.get(url, timeout=10)
         if response.status_code == 200:
             return response.json()
         return None
     except:
         return None
-
-# ------------------ FLASK ROUTE ------------------
-
 @app.route('/', methods=['GET','POST'])
 def index():
     if request.method == 'POST':
-        number = request.form.get('number')
-
-        if not number.isdigit() or len(number) < 10:
-            return render_template_string(premium_html, error="Invalid number! Must be 10 digits.")
-
+        number = request.form.get('number').strip()
+        
+        if not number.isdigit() or len(number) != 10:
+            return render_template_string(premium_html, error="Invalid number! Must be exactly 10 digits.")
+        
+        # Prefix with 91 for Indian numbers
+        number = '91' + number
+        
         data = fetch_number_info(number)
-
-        if not data or 'data' not in data or not data['data']:
+        
+        if not data or 'data' not in data:
             return render_template_string(premium_html, error="No data found for this number.")
-
-        return render_template_string(premium_html, records=data['data'])
-
+        
+        # Handle if data['data'] is a dict or list
+        if isinstance(data['data'], list):
+            records = data['data']
+        elif isinstance(data['data'], dict):
+            records = [data['data']]
+        else:
+            records = []
+        
+        if not records:
+            return render_template_string(premium_html, error="No data found for this number.")
+        
+        return render_template_string(premium_html, records=records)
+    
     return render_template_string(premium_html)
-
-# ------------------ RUN SERVER ------------------
-
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=10000)
+    app.run(host='0.0.0.0', port=20753, debug=True)
